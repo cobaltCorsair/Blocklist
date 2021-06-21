@@ -1,0 +1,53 @@
+﻿#panel {
+    position: fixed;
+    top: 50%;
+    left: -250px;
+    margin: -40px 0 0 -2px;
+    overflow: hidden;
+    z-index: 10000;
+}
+#panel-content {
+    background: rgb(206 206 206);
+	border: 2px solid #6e6a77;
+    box-shadow: 0px 0px 10px #a0a0a0 inset;
+    width: 238px;
+    height: auto;
+    float: left;
+    padding: 3px 5px;
+}
+#panel-sticker {
+    float: left;
+    position: relative;
+    background: url(http://forumstatic.ru/files/000b/09/4f/27594.png) repeat, radial-gradient(ellipse at center, #575171 0%, #31283a 100%);
+    padding: 3px 10px 3px 5px;
+    margin: 0;
+    cursor: pointer;
+    color: #ead28c;
+}
+#blockUsers > li > strong {
+    cursor: pointer;
+    font-size: 17px;
+    color: red;
+    font-weight: bold;
+    top: 2px;
+    position: relative;
+}
+.blockButton:before {
+    content: "×";
+    cursor: pointer;
+    margin-top: -15px;
+    margin-left: -23px;
+    position: absolute;
+    width: 14px;
+    opacity: 1;
+    background: url(http://forumstatic.ru/files/000b/09/4f/27594.png) repeat, radial-gradient(ellipse at center, #575171 0%, #31283a 100%);
+    z-index: 2;
+    color: #ead28c;
+    font-size: 13px;
+    padding-left: 5px;
+}
+ul#blockUsers {
+    list-style-type: none;
+    float: left;
+    margin-left: 25px;
+}

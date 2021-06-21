@@ -1,10 +1,10 @@
 ﻿/*********************************
   Live Your Life
   Черный список
-  Версия: V0.0.1
+  Версия: V0.0.2
   Автор: cobaltCorsair
   Дата: 15.12.2020
-  Последние изменения: 17.12.2020
+  Последние изменения: 21.06.2021
 *********************************/
 
 function blackList() {
@@ -89,6 +89,9 @@ function blackList() {
                              let blockedUsersID = Object.values(bUsers);
                              hideMessages(blockedUsersID);
 
+                             let blockedUsersNames = Object.keys(bUsers);
+                             toggleQuotes(blockedUsersNames, 1);
+
                              let blockUsers = $("#blockUsers");
                              addInMenu(bUsers, blockUsers);
                              getDelID();
@@ -137,8 +140,11 @@ function blackList() {
     function getDelID() {
         $('#blockUsers > li > strong').click(function() {
         let deletedID = $(this).attr('data-uid');
+        let deletedAuthorName = $('#blockUsers > li').text().split(' × ')[0];
+
         delFromObject(deletedID);
         showUser(deletedID);
+        toggleQuotes(deletedAuthorName, 0);
         });
     }
 
@@ -188,6 +194,21 @@ function blackList() {
     function addInObject(userArray) {
         blockedUsers[userArray[1]] = userArray[0];
     }
+
+    // скрываем цитаты внутри постов
+    function toggleQuotes(blockedUsersNames, statusCode) {
+        $('.post:visible .quote-box').each(function () {
+            let authorName = $(this).text().split(' написал(а):')[0];
+            if (blockedUsersNames.indexOf(authorName)!==-1){
+                if (statusCode === 1) {
+                    $(this).hide()
+                }
+                else if (statusCode === 0) {
+                     $(this).show()
+                }
+            }
+        })}
+
 
 }
 

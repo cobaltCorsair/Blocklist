@@ -1,10 +1,10 @@
 ﻿/*********************************
   Live Your Life
   Черный список
-  Версия: V0.0.2
+  Версия: V0.0.3
   Автор: cobaltCorsair
   Дата: 15.12.2020
-  Последние изменения: 21.06.2021
+  Последние изменения: 04.04.2022
 *********************************/
 
 function blackList() {
@@ -80,8 +80,19 @@ function blackList() {
             },
             function (json) {
                      if (json.response) {
+                         let myId = String(UserID);
                          let bUsers = json.response.storage.data["block_users"];
                          bUsers = JSON.parse(bUsers);
+
+                         if (Object.values(bUsers).indexOf(myId) !== -1) {
+
+                             bUsers = Object.fromEntries(Object.entries(bUsers).filter(n => n[1] !== myId));
+                             appendUser(bUsers);
+
+                             showUser(myId);
+                             toggleQuotes(UserLogin, 0);
+
+                         }
 
                          if (Object.keys(bUsers).length !== 0) {
                              blockedUsers = bUsers;
@@ -168,7 +179,7 @@ function blackList() {
     function addButton() {
             const button = "<div class=\"blockButton\" alt=\"Добавить в ЧС\" title=\"Добавить в ЧС\"/></div>";
 
-            $("#pun-viewtopic .post-author").each(function() {
+            $("#pun-viewtopic .post:not(.post[data-user-id='"+ UserID +"']) .post-author").each(function() {
                     $(this).wrap("<div class='toBlock'></div>");
                     $(this).after(button);
 
